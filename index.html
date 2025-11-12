@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Wara Privacy Policy</title>
+    <style>
+      :root { color-scheme: light dark; }
+      body {
+        margin: 0 auto;
+        padding: 32px 20px;
+        max-width: 860px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.6;
+      }
+      h1, h2, h3 { line-height: 1.25; }
+      h1 { font-size: 2rem; margin: 0 0 0.5rem; }
+      .updated { color: #666; font-size: 0.95rem; margin: 0 0 1.25rem; }
+      p { margin: 0 0 1rem; }
+      ul { margin: 0.5rem 0 1rem 1.25rem; }
+      li { margin: 0.4rem 0; }
+      code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+      a { color: #0b6cff; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      hr { border: 0; border-top: 1px solid rgba(127,127,127,.35); margin: 1.5rem 0; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Wara Privacy Policy</h1>
+      <p class="updated">Last updated: 12 Nov 2025</p>
+    </header>
+
+    <p>This Privacy Policy describes how Wara (the “App”) collects, uses, and protects information when you use its ingredient label scanning and product classification features.</p>
+    <p>By using the App, you agree to the practices described here. If you do not agree, please do not use the App.</p>
+
+    <h2>Information We Collect</h2>
+    <ul>
+      <li>
+        <strong>Camera input (on-device processing)</strong>
+        <ul>
+          <li>The App uses your device camera to capture images of product labels for Optical Character Recognition (OCR).</li>
+          <li>OCR is performed locally on your device using Apple’s Vision framework; the original images are not uploaded to our servers.</li>
+          <li>The App may send the text recognized from the image (raw OCR text) to our backend in order to classify the product and provide results.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Imported photos (on-device processing)</strong>
+        <ul>
+          <li>If you choose to import photos from your library, the App processes them locally for OCR. As with camera input, only the recognized text may be sent to the backend; the original photo is not uploaded.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Pseudonymous identifier</strong>
+        <ul>
+          <li>On first launch, the App generates a pseudonymous <code>user_id</code> (UUIDv7) and stores it on your device (<code>UserDefaults</code>).</li>
+          <li>This identifier is attached to API requests via the <code>X-User-ID</code> header for request correlation and service quality (e.g., rate limiting, troubleshooting). It is not combined with contact details.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Usage data and logs</strong>
+        <ul>
+          <li>The App records minimal runtime logs (e.g., load and error messages) for functionality. These logs are local to the device; the App does not embed third‑party analytics SDKs.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Product and category data</strong>
+        <ul>
+          <li>The App downloads product details, images, and categories from the backend to show results and recommendations. This content does not contain personal information.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>How We Use Information</h2>
+    <ul>
+      <li>Provide product scanning and classification results based on OCR text.</li>
+      <li>Show relevant product categories and alternatives.</li>
+      <li>Maintain service quality, including request correlation through the pseudonymous <code>user_id</code>.</li>
+    </ul>
+
+    <h2>Data Processing and Transfers</h2>
+    <ul>
+      <li>
+        <strong>Backend endpoints</strong>
+        <ul>
+          <li>The App communicates with our backend (e.g., <code>api.wara.web.id</code> for production and <code>api-dev.wara.web.id</code> for development) to classify products and fetch related content.</li>
+          <li>Requests may include the <code>X-User-ID</code> header and the raw OCR text payload.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Encryption in transit</strong>
+        <ul>
+          <li>Production traffic uses HTTPS (TLS). Non‑production environments used for development may use HTTP, but release builds aim to use HTTPS.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Third‑party frameworks</strong>
+        <ul>
+          <li>Apple frameworks (Vision, AVFoundation, SwiftData, UIKit) operate locally on your device.</li>
+          <li>Networking uses Alamofire purely as an HTTP client; it does not independently collect personal data.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>On‑Device Storage and Retention</h2>
+    <ul>
+      <li>
+        <strong>Pseudonymous <code>user_id</code></strong>
+        <ul>
+          <li>Stored in <code>UserDefaults</code> until you delete the App or reset the device’s app data.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Image caching</strong>
+        <ul>
+          <li>Remote product images loaded from the backend may be cached in the system Caches directory to improve performance. These are not personal to you and may be cleared by iOS automatically or by uninstalling the App.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Recognized text and images</strong>
+        <ul>
+          <li>Original images are not persisted by the App. Recognized text may be held in memory briefly to complete classification, then discarded, except where necessary to display results.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>Server‑Side Retention</h2>
+    <p>The backend receives raw OCR text and the <code>X-User-ID</code> header to provide classification. We aim to retain this information only as long as necessary to deliver and improve the service. Specific retention periods may vary with operational needs and legal obligations.</p>
+
+    <h2>Your Choices and Rights</h2>
+    <ul>
+      <li>
+        <strong>Permissions</strong>
+        <ul>
+          <li>Camera: required to scan labels. You can grant or revoke this in iOS Settings.</li>
+          <li>Photo Library: optional for importing images. You can grant or revoke this in iOS Settings.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Deletion</strong>
+        <ul>
+          <li>Deleting the App removes on‑device data, including the pseudonymous <code>user_id</code> and cached images. You may request backend deletion of data associated with your <code>user_id</code> by contacting us.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Opt‑out of tracking</strong>
+        <ul>
+          <li>The App does not track you across third‑party apps or websites and does not use advertising identifiers.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>Data Sharing</h2>
+    <ul>
+      <li>We do not sell personal information.</li>
+      <li>We share data only with service providers necessary to operate the backend and deliver App functionality, under appropriate safeguards.</li>
+    </ul>
+
+    <h2>Children’s Privacy</h2>
+    <p>The App is not directed to children under 13. If you believe a child provided us data, please contact us so we can delete it.</p>
+
+    <h2>Security</h2>
+    <p>We use technical and organizational measures to protect information, including TLS encryption in production for data in transit and controlled access on the backend. However, no method of transmission or storage is 100% secure.</p>
+
+    <h2>Changes to This Policy</h2>
+    <p>We may update this Policy from time to time. The “Last updated” date at the top reflects the latest revision. Continued use of the App after changes indicates acceptance of the updated Policy.</p>
+
+    <h2>Contact</h2>
+    <p>For privacy questions or requests (including deletion), please email: <a href="mailto:business.irham@gmail.com">business.irham@gmail.com</a> or use the contact method listed on the App Store page.</p>
+  </body>
+</html>
