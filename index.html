@@ -71,8 +71,9 @@
         <strong>Scan history and favorites</strong>
         <ul>
           <li>When you scan products or mark items as favorites, this information is stored locally on your device.</li>
-          <li>The App syncs favorite status and scan metadata with the backend using the <code>user_id</code> to provide a consistent experience across sessions.</li>
-          <li>All scanned product photos are automatically stored on our servers and associated with your scan results to display in your history and share with the community.</li>
+          <li>The App syncs favorite status and scan metadata with the backend using the <code>user_id</code> to provide a consistent experience across sessions and calculate aggregate product popularity metrics (such as favorite counts).</li>
+          <li>Successfully scanned product photos are uploaded to our servers and associated with your scan results to display in your history and share with the community.</li>
+          <li>Syncing favorites, scan results, and uploading photos require an active internet connection. If the network request fails (e.g., when offline), these actions will not be completed until you retry when back online.</li>
         </ul>
       </li>
       <li>
@@ -155,7 +156,7 @@
         <ul>
           <li>Product photos from successful scans (via camera or photo library) are uploaded and stored on our cloud storage servers after OCR processing and classification complete.</li>
           <li>Uploaded photos are associated with your <code>user_id</code> and the specific scan result ID.</li>
-          <li>Photos may include front and/or back packaging images ("front" or "back" label designation).</li>
+          <li>Photos may include front and/or back packaging images. The app stores a label ("front" or "back") to indicate which side of the packaging the photo represents, helping display accurate product images.</li>
           <li>These photos are displayed to other users in search results and product details to help the community identify halal products.</li>
           <li>Original photos are not retained locally on your device after upload; only the OCR text is kept briefly in memory for classification, then discarded.</li>
         </ul>
