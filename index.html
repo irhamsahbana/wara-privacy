@@ -29,26 +29,29 @@
   <body>
     <header>
       <h1>Wara Privacy Policy</h1>
-      <p class="updated">Last updated: 12 Nov 2025</p>
+      <p class="updated">Last updated: 28 Nov 2025</p>
     </header>
 
-    <p>This Privacy Policy describes how Wara (the “App”) collects, uses, and protects information when you use its ingredient label scanning and product classification features.</p>
+    <p>This Privacy Policy describes how Wara (the "App") collects, uses, and protects information when you use its Korean food product ingredient scanning and halal classification features.</p>
     <p>By using the App, you agree to the practices described here. If you do not agree, please do not use the App.</p>
 
     <h2>Information We Collect</h2>
     <ul>
       <li>
-        <strong>Camera input (on-device processing)</strong>
+        <strong>Camera input and photo upload</strong>
         <ul>
           <li>The App uses your device camera to capture images of product labels for Optical Character Recognition (OCR).</li>
-          <li>OCR is performed locally on your device using Apple’s Vision framework; the original images are not uploaded to our servers.</li>
-          <li>The App may send the text recognized from the image (raw OCR text) to our backend in order to classify the product and provide results.</li>
+          <li>OCR is performed locally on your device using Apple's Vision framework to extract Korean text from the label.</li>
+          <li>The raw OCR text is sent to our backend to classify the product and provide halal status results.</li>
+          <li><strong>The scanned product photo is uploaded to our servers</strong> after successful OCR analysis and product classification. This happens automatically once the backend returns scan results. Photos help build our product database and enable sharing product images with other users. Photos are associated with your <code>user_id</code> and the scan result.</li>
         </ul>
       </li>
       <li>
-        <strong>Imported photos (on-device processing)</strong>
+        <strong>Photo library access and upload</strong>
         <ul>
-          <li>If you choose to import photos from your library, the App processes them locally for OCR. As with camera input, only the recognized text may be sent to the backend; the original photo is not uploaded.</li>
+          <li>If you choose to import photos from your library for scanning, the App processes them locally for OCR using the same Vision framework.</li>
+          <li>The recognized text is sent to the backend for classification.</li>
+          <li>Imported photos are also uploaded to our servers after successful scanning, just like camera-captured photos, to contribute to the product database.</li>
         </ul>
       </li>
       <li>
@@ -59,24 +62,44 @@
         </ul>
       </li>
       <li>
-        <strong>Usage data and logs</strong>
+        <strong>Local ingredient database</strong>
         <ul>
-          <li>The App records minimal runtime logs (e.g., load and error messages) for functionality. These logs are local to the device; the App does not embed third‑party analytics SDKs.</li>
+          <li>The App maintains a local database of Korean ingredient names and their halal classification using SwiftData. This data is stored on your device only and used to provide real-time ingredient detection and classification.</li>
         </ul>
       </li>
       <li>
-        <strong>Product and category data</strong>
+        <strong>Scan history and favorites</strong>
         <ul>
-          <li>The App downloads product details, images, and categories from the backend to show results and recommendations. This content does not contain personal information.</li>
+          <li>When you scan products or mark items as favorites, this information is stored locally on your device.</li>
+          <li>The App syncs favorite status and scan metadata with the backend using the <code>user_id</code> to provide a consistent experience across sessions.</li>
+          <li>All scanned product photos are automatically stored on our servers and associated with your scan results to display in your history and share with the community.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Usage data and logs</strong>
+        <ul>
+          <li>The App records minimal runtime logs (e.g., load and error messages) for debugging and functionality. These logs are local to the device; the App does not embed third‑party analytics SDKs or tracking services.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Product information from backend</strong>
+        <ul>
+          <li>The App downloads product details, ingredient lists, halal classifications, images, and categories from the backend after scanning.</li>
+          <li>The backend analyzes the OCR text and returns detailed product information including Korean and English ingredient names, halal status (safe/doubtful/haram), and KMF certification data.</li>
+          <li>This content does not contain your personal information.</li>
         </ul>
       </li>
     </ul>
 
     <h2>How We Use Information</h2>
     <ul>
-      <li>Provide product scanning and classification results based on OCR text.</li>
-      <li>Show relevant product categories and alternatives.</li>
-      <li>Maintain service quality, including request correlation through the pseudonymous <code>user_id</code>.</li>
+      <li>Provide Korean ingredient scanning and halal classification results based on OCR text analysis.</li>
+      <li>Show relevant product details, categories, and halal alternatives.</li>
+      <li>Save your favorite products and scan history (stored locally and synced with backend).</li>
+      <li>Store successfully scanned product photos to build a comprehensive community product database and improve recognition accuracy.</li>
+      <li>Display product images in scan results and search features for you and other users.</li>
+      <li>Maintain service quality, including request correlation and rate limiting through the pseudonymous <code>user_id</code>.</li>
+      <li>Provide real-time ingredient detection feedback using on-device haptic alerts.</li>
     </ul>
 
     <h2>Data Processing and Transfers</h2>
@@ -84,8 +107,10 @@
       <li>
         <strong>Backend endpoints</strong>
         <ul>
-          <li>The App communicates with our backend (e.g., <code>api.wara.web.id</code> for production and <code>api-dev.wara.web.id</code> for development) to classify products and fetch related content.</li>
-          <li>Requests may include the <code>X-User-ID</code> header and the raw OCR text payload.</li>
+          <li>The App communicates with our backend (<code>api.wara.web.id</code> for production and <code>api-dev.wara.web.id</code> for development) to classify products, fetch product details, and sync favorite status.</li>
+          <li>Scan requests include the <code>X-User-ID</code> header and the raw OCR text extracted from the product label.</li>
+          <li><strong>Photo uploads</strong>: Successfully scanned product photos are uploaded via multipart form-data to our servers after OCR analysis and classification complete. Photos are stored in cloud storage (S3-compatible) and the photo URL is associated with your scan result and <code>user_id</code>.</li>
+          <li>The backend may return product information, images (from our database or user uploads), categories, and halal alternatives based on the submitted OCR text.</li>
         </ul>
       </li>
       <li>
@@ -118,15 +143,29 @@
         </ul>
       </li>
       <li>
-        <strong>Recognized text and images</strong>
+        <strong>Scan history and favorites</strong>
         <ul>
-          <li>Original images are not persisted by the App. Recognized text may be held in memory briefly to complete classification, then discarded, except where necessary to display results.</li>
+          <li>Products you scan or mark as favorites are stored locally on your device.</li>
+          <li>Scan metadata (product ID, timestamp, favorite status) is synced with the backend to enable cross-device access and personalized recommendations.</li>
+          <li>Successfully scanned product photos are uploaded to our servers and linked to your scan results.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Scanned product photos</strong>
+        <ul>
+          <li>Product photos from successful scans (via camera or photo library) are uploaded and stored on our cloud storage servers after OCR processing and classification complete.</li>
+          <li>Uploaded photos are associated with your <code>user_id</code> and the specific scan result ID.</li>
+          <li>Photos may include front and/or back packaging images ("front" or "back" label designation).</li>
+          <li>These photos are displayed to other users in search results and product details to help the community identify halal products.</li>
+          <li>Original photos are not retained locally on your device after upload; only the OCR text is kept briefly in memory for classification, then discarded.</li>
         </ul>
       </li>
     </ul>
 
     <h2>Server‑Side Retention</h2>
-    <p>The backend receives raw OCR text and the <code>X-User-ID</code> header to provide classification. We aim to retain this information only as long as necessary to deliver and improve the service. Specific retention periods may vary with operational needs and legal obligations.</p>
+    <p>The backend receives raw OCR text and the <code>X-User-ID</code> header to provide product classification and results. We aim to retain this information only as long as necessary to deliver and improve the service.</p>
+    <p><strong>Successfully scanned product photos</strong> are uploaded and stored on our cloud servers indefinitely to maintain the community product database. These photos are associated with your <code>user_id</code> and scan result metadata. You may request deletion of your uploaded photos by contacting us.</p>
+    <p>Product favorites and scan metadata associated with your <code>user_id</code> may be retained to enable personalization and service continuity. Specific retention periods may vary with operational needs and legal obligations.</p>
 
     <h2>Your Choices and Rights</h2>
     <ul>
@@ -140,7 +179,9 @@
       <li>
         <strong>Deletion</strong>
         <ul>
-          <li>Deleting the App removes on‑device data, including the pseudonymous <code>user_id</code> and cached images. You may request backend deletion of data associated with your <code>user_id</code> by contacting us.</li>
+          <li>Deleting the App removes on‑device data, including the pseudonymous <code>user_id</code>, cached images, and local scan history.</li>
+          <li>You may request backend deletion of scan metadata, favorites, and scanned photos associated with your <code>user_id</code> by contacting us.</li>
+          <li>Note that successfully scanned photos are uploaded and shared with the community; deletion requests will remove them from our servers, but other users may have already viewed or cached them.</li>
         </ul>
       </li>
       <li>
